@@ -1,4 +1,3 @@
-import { HydrateFlavor } from "@grammyjs/hydrate";
 import { Context, SessionFlavor } from "grammy";
 export interface zoom_url {
     German: string;

@@ -8,7 +8,7 @@ import { CustomContext } from "./bot";
 export const show_schedule = (day: string) => {
     const _Date = _d.utcToZonedTime(new Date(), "Europe/Kyiv");
     const week = getWeekOfMonth(_Date) % 2;
-    const time = format(_Date,"HH:mm");
+    const time = format(_Date, "HH:mm");
     const current_day = format(_Date, "dddd");
     const days_i18n: { [day: string]: string } = {
         Monday: "Понеділок",

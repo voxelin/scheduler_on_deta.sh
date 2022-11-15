@@ -1,13 +1,13 @@
 import { format, getWeekOfMonth, isWeekend } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
 import { schedule } from "../data/schedule";
+import { CustomContext } from "../types/bot";
 import { schedule_days_menu, show_schedule } from "../types/menu";
 import { SchedulerBot } from "./bot";
 import { CommandHandlerError } from "./errors";
-import { CustomContext } from "../types/bot";
 export class CommandHandler<C extends CustomContext = CustomContext> {
-    constructor(private readonly sysHandlers: SystemHandler<C>) { }
-    private localdate =  utcToZonedTime(new Date(), "Europe/Kyiv");
+    constructor(private readonly sysHandlers: SystemHandler<C>) {}
+    private localdate = utcToZonedTime(new Date(), "Europe/Kyiv");
     public async start(ctx: C) {
         await ctx.reply("Працюю на благо учнів ліцею 🤖\nАвтор: @voxelin", { parse_mode: "Markdown" });
     }
@@ -21,8 +21,7 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
         );
     }
     public async link(ctx: C) {
-        if (isWeekend(this.localdate))
-            return await ctx.reply("Сьогодні вихідний, занять немає! 🤗");
+        if (isWeekend(this.localdate)) return await ctx.reply("Сьогодні вихідний, занять немає! 🤗");
         const data = this.sysHandlers.handleLink(true);
         if (Object.keys(data).length === 0) return ctx.reply("Уроки закінчились, відпочивайте! 🫂");
         const week = getWeekOfMonth(this.localdate) % 2;
@@ -74,7 +73,7 @@ export class SystemHandler<C extends CustomContext> {
     constructor(private readonly bot: SchedulerBot<C>) {
         this.commandHandler = new CommandHandler<C>(this);
     }
-    private localdate =  utcToZonedTime(new Date(), "Europe/Kyiv");
+    private localdate = utcToZonedTime(new Date(), "Europe/Kyiv");
 
     public async handleTime(gid: number) {
         const data = this.handleLink();
