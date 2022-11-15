@@ -1,6 +1,6 @@
 import { autoRetry } from "@grammyjs/auto-retry";
 import { parseMode } from "@grammyjs/parse-mode";
-import { Bot, Context } from "grammy";
+import { Bot } from "grammy";
 import { CustomContext } from "../types/bot";
 import { schedule_days_menu } from "../types/menu";
 import { CommandHandler, SystemHandler } from "./handler";
