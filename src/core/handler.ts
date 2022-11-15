@@ -72,7 +72,7 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
 }
 
 export class SystemHandler<C extends CustomContext> {
-    public localdate = utcToZonedTime(new Date(), "Europe/Kyiv");
+    public localdate = utcToZonedTime(new Date(), "Europe/Kiev");
     constructor(private readonly bot: SchedulerBot<C>, private readonly commands?: CommandHandler<C>) {
         this.commands = new CommandHandler<C>(this);
     }
