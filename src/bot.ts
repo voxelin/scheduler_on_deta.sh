@@ -15,13 +15,9 @@ bot.use(
     }),
 );
 
-bot.on("message", (ctx) => {
+bot.on("message", async (ctx) => {
     try {
-        const command = ctx.message
-            .text!.replace(/@testchungabot/g, "")
-            .replace(/@chungachanga_rebot/g, "")
-            .replace("/", "");
-        bot.sysHandlers.handleCommand(ctx, command);
+        await bot.sysHandlers.handleCommand(ctx, ctx.message.text);
     } catch (e) {
         return;
     }
