@@ -80,29 +80,45 @@ export class SystemHandler<C extends CustomContext> {
     public async handleLink(manual = false) {
         const day = format(this.localdate, "EEEE");
         const time = format(this.localdate, "HH:mm");
-        const data = schedule[day];
-        let item = data[1];
-        for (let i = 0; i < data.length; i++) {
-            if (time >= data[i].start && time <= data[i].end) {
-                item = data[i];
-            }
-        }
-        if (data == undefined) return {};
-        const [start, end] = [item["start"], item["end"]];
-        const [name, urls] = [item["name"], item["urls"]];
-        if (time >= start && time <= end) {
-            item.sent = true;
-            return { name: name, urls: urls, next: false };
-        } else if (time < start) {
-            if (manual) {
-                item.sent = true;
-                return { name: name, urls: urls, next: true };
-            } else {
-                return {};
+        let _next = false;
+        let _name = "";
+        let _urls: string[] = [];
+        let _sent = false;
+        if (!isWeekend(this.localdate)) {
+            for (let i = 0; i < schedule[day].length; i++) {
+                if (time >= schedule[day][schedule[day].length - 1].end) {
+                    return {};
+                }
+                if (manual) {
+                    if (time >= schedule[day][i].start && time <= schedule[day][i].end) {
+                        _sent = schedule[day][i].sent ?? false;
+                        _urls = schedule[day][i].urls;
+                        _name = schedule[day][i].name;
+                        schedule[day][i].sent = true;
+                        break;
+                    }
+                    if (time >= schedule[day][i].end && time <= schedule[day][i + 1].start) {
+                        _sent = schedule[day][i + 1].sent ?? false;
+                        _urls = schedule[day][i + 1].urls;
+                        _name = schedule[day][i + 1].name;
+                        _next = true;
+                        schedule[day][i + 1].sent = true;
+                        break;
+                    }
+                } else {
+                    if (time >= schedule[day][i].start && time <= schedule[day][i].end && !schedule[day][i].sent) {
+                        _sent = schedule[day][i].sent ?? false;
+                        _urls = schedule[day][i].urls;
+                        _name = schedule[day][i].name;
+                        schedule[day][i].sent = true;
+                        break;
+                    }
+                }
             }
         } else {
             return {};
         }
+        return { urls: _urls, name: _name, next: _next, sent: _sent };
     }
 
     public async handleCommand(ctx: C, command?: string) {
