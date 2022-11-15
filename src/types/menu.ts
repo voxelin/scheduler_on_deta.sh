@@ -1,15 +1,14 @@
 import { Menu } from "@grammyjs/menu";
 import { format, getWeekOfMonth } from "date-fns";
-import * as _d from "date-fns-tz";
+import { utcToZonedTime } from "date-fns-tz";
 import { v4 } from "uuid";
 import { schedule } from "../data/schedule";
 import { CustomContext } from "./bot";
 
 export const show_schedule = (day: string) => {
-    const _Date = _d.utcToZonedTime(new Date(), "Europe/Kyiv");
-    const week = getWeekOfMonth(_Date) % 2;
-    const time = format(_Date, "HH:mm");
-    const current_day = format(_Date, "dddd");
+    const week = getWeekOfMonth(utcToZonedTime(new Date(), "Europe/Kiev")) % 2;
+    const time = format(utcToZonedTime(new Date(), "Europe/Kiev"), "HH:mm");
+    const current_day = format(utcToZonedTime(new Date(), "Europe/Kiev"), "EEEE");
     const days_i18n: { [day: string]: string } = {
         Monday: "Понеділок",
         Tuesday: "Вівторок",

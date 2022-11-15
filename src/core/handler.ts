@@ -7,7 +7,7 @@ import { SchedulerBot } from "./bot";
 import { CommandHandlerError } from "./errors";
 export class CommandHandler<C extends CustomContext = CustomContext> {
     constructor(private readonly sysHandlers: SystemHandler<C>) {}
-    private localdate = utcToZonedTime(new Date(), "Europe/Kyiv");
+    private localdate = utcToZonedTime(new Date(), "Europe/Kiev");
     public async start(ctx: C) {
         await ctx.reply("Працюю на благо учнів ліцею 🤖\nАвтор: @voxelin", { parse_mode: "Markdown" });
     }
@@ -27,7 +27,7 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
         const _d = await this.sysHandlers.handleLink(true);
         const { urls, next } = _d;
         let { name } = _d;
-        if (!urls && !next && !name) return ctx.reply("Уроки закінчились, відпочивайте! 🫂");
+        if (Object.keys(_d).length === 0) return ctx.reply("Уроки закінчились, відпочивайте! 🫂");
         const oddWeek = getWeekOfMonth(this.localdate) % 2;
         switch (name) {
             case "🎨 Мистецтво | 📜 Основи здоров'я":
@@ -63,7 +63,7 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
     }
 
     public async schedule(ctx: C) {
-        await ctx.reply(show_schedule(format(this.localdate, "dddd")), {
+        await ctx.reply(show_schedule(format(this.localdate, "EEEE")), {
             parse_mode: "Markdown",
             reply_markup: schedule_days_menu,
             disable_web_page_preview: true,
