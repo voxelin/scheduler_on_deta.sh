@@ -26,4 +26,5 @@ export interface schedule {
 export interface SessionData {
     send_links: boolean;
 }
+
 export type CustomContext = Context & SessionFlavor<SessionData>;

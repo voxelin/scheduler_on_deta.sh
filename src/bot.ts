@@ -1,9 +1,11 @@
 import { DetaAdapter } from "@grammyjs/storage-deta";
+import { config } from "dotenv";
 import { session } from "grammy";
-import { SchedulerBot } from "./core/bot";
+import { DevCheckQuery, SchedulerBot } from "./core/bot";
 import { CustomContext, SessionData } from "./types/bot";
 
-export const bot = new SchedulerBot<CustomContext>(process.env.BOT_TOKEN || "");
+if (DevCheckQuery) config({ path: ".env.dev" });
+export const bot = new SchedulerBot<CustomContext>();
 bot.prepare();
 
 bot.use(
@@ -11,7 +13,7 @@ bot.use(
         initial: () => ({ send_links: true }),
         storage: new DetaAdapter<SessionData>({
             baseName: "session",
-            projectKey: process.env.DETA_PROJECT_KEY || "",
+            projectKey: process.env.DETA_PROJECT_KEY ?? "",
         }),
     }),
 );
@@ -23,3 +25,10 @@ bot.on("message", async (ctx) => {
         return;
     }
 });
+
+if (DevCheckQuery) {
+    bot.api.deleteWebhook();
+    bot.start();
+} else {
+    bot.api.setWebhook(process.env.WEBHOOK_URL!);
+}

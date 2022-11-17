@@ -35,14 +35,14 @@ export const show_schedule = (day: string) => {
                     message += `_${item.start}_-_${item.end}_ — ${item.name} ([Беднар](${item.urls[0]}) | [Шеремет](${item.urls[1]}))\n`;
                     break;
                 case "🎨 Мистецтво | 📜 Основи здоров'я":
-                    if (week == 1) {
+                    if (week == 0) {
                         message += `_${item.start}_-_${item.end}_ — [📜 Основи здоров'я](${item.urls[1]})\n`;
                     } else {
                         message += `_${item.start}_-_${item.end}_ — [🎨 Мистецтво](${item.urls[0]})\n`;
                     }
                     break;
                 case "🌍 Географія | 📜 Історія України":
-                    if (week == 1) {
+                    if (week == 0) {
                         message += `_${item.start}_-_${item.end}_ — [📜 Історія України](${item.urls[1]})\n`;
                     } else {
                         message += `_${item.start}_-_${item.end}_ — [🌍 Географія](${item.urls[0]})\n`;
@@ -59,7 +59,7 @@ export const show_schedule = (day: string) => {
     return message;
 };
 
-export const schedule_days_menu = new Menu<CustomContext>("schedule_days_menu", { onMenuOutdated: "Updated, try now." })
+export const schedule_days_menu = new Menu<CustomContext>("schedule_days_menu", { onMenuOutdated: "Спробуйте знову." })
     .text("Понеділок", (ctx) => {
         const s = show_schedule("Monday");
         ctx.editMessageText(s, { parse_mode: "Markdown", disable_web_page_preview: true });

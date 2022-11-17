@@ -8,7 +8,7 @@ import { CommandHandler, SystemHandler } from "./handler";
 export class SchedulerBot<C extends CustomContext> extends Bot<C> {
     public contextHandler: CommandHandler<C>;
     public sysHandlers: SystemHandler<C>;
-    constructor(token: string) {
+    constructor(token?: string) {
         super(token || String(process.env.BOT_TOKEN));
         this.sysHandlers = new SystemHandler<C>(this);
         this.contextHandler = new CommandHandler<C>(this.sysHandlers);
@@ -20,3 +20,5 @@ export class SchedulerBot<C extends CustomContext> extends Bot<C> {
         this.api.config.use(autoRetry());
     }
 }
+
+export const DevCheckQuery = process.argv[2] === "--dev" || process.env.NODE_ENV === "development";

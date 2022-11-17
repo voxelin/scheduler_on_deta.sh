@@ -4,12 +4,12 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "dev": "yarn tsc && node dist/poll.js",
+        "dev": "yarn tsc && node dist/bot.js --dev",
         "deploy": "yarn tsc && deta deploy",
         "lint": "eslint src --ext .ts",
         "lint:fix": "eslint src --ext .ts --fix",
         "format": "prettier --write .",
-        "git:do": "git add . && git cz -S && git push",
+        "git": "git add . && git cz -S && git push",
         "prepare": "husky install"
     },
     "engines": {

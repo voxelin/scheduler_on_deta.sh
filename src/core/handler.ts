@@ -1,5 +1,6 @@
 import { format, getWeekOfMonth, isWeekend } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
+import { bot } from "../bot";
 import { schedule } from "../data/schedule";
 import { CustomContext } from "../types/bot";
 import { schedule_days_menu, show_schedule } from "../types/menu";
@@ -68,6 +69,20 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
             reply_markup: schedule_days_menu,
             disable_web_page_preview: true,
         });
+    }
+
+    public async botinfo(ctx: C) {
+        // Check if the user is an owner
+        if (ctx.from?.id !== 5187696616) return ctx.reply("Тільки власник бота може використовувати цю команду 🤖");
+        await ctx.reply(`
+<code>@${(await bot.api.getMe()).username} 🤖</code>
+├ <b>Uptime:</b> <code>${Math.round(process.uptime())}sec</code>
+├ <b>Memory usage:</b> <code>${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB</code>
+├ <b>Host:</b> <code>deta.sh</code>
+├ <b>Endpoint:</b> <code>https://endpoint.blackvoxel.space</code>
+├ <b>Node.js:</b> <code>${process.version}</code>
+├ <b>Pending endpoint updates:</b> <code>${await (await bot.api.getWebhookInfo()).pending_update_count}</code>
+└ <b>Commands:</b> <code>${Object.getOwnPropertyNames(Object.getPrototypeOf(this)).length}</code>`);
     }
 }
 
