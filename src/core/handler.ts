@@ -4,7 +4,7 @@ import { bot } from "../bot";
 import { schedule } from "../data/schedule";
 import { CustomContext } from "../types/bot";
 import { schedule_days_menu, show_schedule } from "../types/menu";
-import { SchedulerBot } from "./bot";
+import { DevCheckQuery, SchedulerBot } from "./bot";
 import { CommandHandlerError } from "./errors";
 export class CommandHandler<C extends CustomContext = CustomContext> {
     constructor(private readonly sysHandlers: SystemHandler<C>) {}
@@ -25,21 +25,21 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
         if (isWeekend(this.localdate)) {
             return await ctx.reply("Сьогодні вихідний 🥳");
         }
-        const _d = await this.sysHandlers.handleLink(true);
+        const _d = await this.sysHandlers.handleLink();
         const { urls, next } = _d;
         let { name } = _d;
         if (Object.keys(_d).length === 0) return ctx.reply("Уроки закінчились, відпочивайте! 🫂");
         const oddWeek = getWeekOfMonth(this.localdate) % 2;
         switch (name) {
             case "🎨 Мистецтво | 📜 Основи здоров'я":
-                if (oddWeek == 1) {
+                if (oddWeek == 0) {
                     name = "📜 Основи здоров'я";
                 } else {
                     name = "🎨 Мистецтво";
                 }
                 break;
             case "🌍 Географія | 📜 Історія України":
-                if (oddWeek == 1) {
+                if (oddWeek == 0) {
                     name = "📜 Історія України";
                 } else {
                     name = "🌍 Географія";
@@ -72,17 +72,39 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
     }
 
     public async botinfo(ctx: C) {
-        // Check if the user is an owner
         if (ctx.from?.id !== 5187696616) return ctx.reply("Тільки власник бота може використовувати цю команду 🤖");
         await ctx.reply(`
-<code>@${(await bot.api.getMe()).username} 🤖</code>
+<code>@${(await bot.api.getMe()).username}</code> 🤖
 ├ <b>Uptime:</b> <code>${Math.round(process.uptime())}sec</code>
 ├ <b>Memory usage:</b> <code>${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB</code>
 ├ <b>Host:</b> <code>deta.sh</code>
 ├ <b>Endpoint:</b> <code>https://endpoint.blackvoxel.space</code>
 ├ <b>Node.js:</b> <code>${process.version}</code>
-├ <b>Pending endpoint updates:</b> <code>${await (await bot.api.getWebhookInfo()).pending_update_count}</code>
+├ <b>Pending endpoint updates:</b> <code>${(await bot.api.getWebhookInfo()).pending_update_count - 1}</code>
 └ <b>Commands:</b> <code>${Object.getOwnPropertyNames(Object.getPrototypeOf(this)).length}</code>`);
+    }
+    public async drop(ctx: C) {
+        if (ctx.from?.id !== 5187696616) return ctx.reply("Тільки власник бота може використовувати цю команду 🤖");
+        if (!DevCheckQuery) {
+            if ((await bot.api.getWebhookInfo()).url !== "") {
+                await ctx.reply("Видалення вебхука...");
+                await bot.api.deleteWebhook({ drop_pending_updates: true });
+                await ctx.reply("Вебхук видалено.");
+            } else {
+                await ctx.reply("Вебхук вже видалено. Пропуск...");
+            }
+            if (process.env.WEBHOOK_URL) {
+                await ctx.reply("Встановлення вебхука...");
+                await bot.api.setWebhook(process.env.WEBHOOK_URL);
+                await ctx.reply("Вебхук встановлено. Очікування оновлень...");
+            }
+        } else {
+            return ctx.reply("Ви в режимі тестування. Вебхук не встановлено.");
+        }
+    }
+    public async session(ctx: C) {
+        ctx.session.send_links ? (ctx.session.send_links = false) : (ctx.session.send_links = true);
+        await ctx.reply(String(ctx.session.send_links));
     }
 }
 
@@ -92,7 +114,7 @@ export class SystemHandler<C extends CustomContext> {
         this.commands = new CommandHandler<C>(this);
     }
 
-    public async handleLink(manual = false) {
+    public async handleLink() {
         const day = format(this.localdate, "EEEE");
         const time = format(this.localdate, "HH:mm");
         let _next = false;
@@ -104,30 +126,20 @@ export class SystemHandler<C extends CustomContext> {
                 if (time >= schedule[day][schedule[day].length - 1].end) {
                     return {};
                 }
-                if (manual) {
-                    if (time >= schedule[day][i].start && time <= schedule[day][i].end) {
-                        _sent = schedule[day][i].sent ?? false;
-                        _urls = schedule[day][i].urls;
-                        _name = schedule[day][i].name;
-                        schedule[day][i].sent = true;
-                        break;
-                    }
-                    if (time >= schedule[day][i].end && time <= schedule[day][i + 1].start) {
-                        _sent = schedule[day][i + 1].sent ?? false;
-                        _urls = schedule[day][i + 1].urls;
-                        _name = schedule[day][i + 1].name;
-                        _next = true;
-                        schedule[day][i + 1].sent = true;
-                        break;
-                    }
-                } else {
-                    if (time >= schedule[day][i].start && time <= schedule[day][i].end && !schedule[day][i].sent) {
-                        _sent = schedule[day][i].sent ?? false;
-                        _urls = schedule[day][i].urls;
-                        _name = schedule[day][i].name;
-                        schedule[day][i].sent = true;
-                        break;
-                    }
+                if (time >= schedule[day][i].start && time <= schedule[day][i].end) {
+                    _sent = schedule[day][i].sent ?? false;
+                    _urls = schedule[day][i].urls;
+                    _name = schedule[day][i].name;
+                    schedule[day][i].sent = true;
+                    break;
+                }
+                if (time >= schedule[day][i].end && time <= schedule[day][i + 1].start) {
+                    _sent = schedule[day][i + 1].sent ?? false;
+                    _urls = schedule[day][i + 1].urls;
+                    _name = schedule[day][i + 1].name;
+                    _next = true;
+                    schedule[day][i + 1].sent = true;
+                    break;
                 }
             }
         } else {

@@ -1,9 +1,8 @@
-import { DetaAdapter } from "@grammyjs/storage-deta";
 import { config } from "dotenv";
 import { session } from "grammy";
 import { DevCheckQuery, SchedulerBot } from "./core/bot";
 import { CustomContext, SessionData } from "./types/bot";
-
+import { freeStorage } from "@grammyjs/storage-free";
 if (DevCheckQuery) config({ path: ".env.dev" });
 export const bot = new SchedulerBot<CustomContext>();
 bot.prepare();
@@ -11,10 +10,7 @@ bot.prepare();
 bot.use(
     session({
         initial: () => ({ send_links: true }),
-        storage: new DetaAdapter<SessionData>({
-            baseName: "session",
-            projectKey: process.env.DETA_PROJECT_KEY ?? "",
-        }),
+        storage: freeStorage<SessionData>(bot.token),
     }),
 );
 
