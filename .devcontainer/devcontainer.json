@@ -1,5 +1,10 @@
 {
-	"name": "Node.js & TypeScript",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:16-bullseye",
-	"postCreateCommand": "yarn install"
+    "name": "Node.js & TypeScript",
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:16-bullseye",
+    "postCreateCommand": "yarn install",
+    "customizations": {
+        "vscode": {
+            "extensions": ["dbaeumer.vscode-eslint", "rvest.vs-code-prettier-eslint"]
+        }
+    }
 }
