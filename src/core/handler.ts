@@ -149,6 +149,8 @@ export class SystemHandler<C extends CustomContext> {
     }
 
     public async handleCommand(ctx: C, command?: string) {
+        if ([953390376, 1220615061].includes(ctx.message!.from!.id))
+            return ctx.reply("Недостатньо прав для виконання команди.");
         if (!command) throw new CommandHandlerError("Command is undefined");
         if (command.startsWith("/")) command = command.slice(1);
         if (command.includes("@")) {
