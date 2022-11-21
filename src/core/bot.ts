@@ -2,7 +2,7 @@ import { autoRetry } from "@grammyjs/auto-retry";
 import { parseMode } from "@grammyjs/parse-mode";
 import { Bot } from "grammy";
 import { CustomContext } from "../types/bot";
-import { schedule_days_menu, shelf_inline } from "../types/menu";
+import { schedule_days_menu } from "../types/menu";
 import { CommandHandler, SystemHandler } from "./handler";
 
 export class SchedulerBot<C extends CustomContext> extends Bot<C> {
