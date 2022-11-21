@@ -6,8 +6,8 @@
         "vscode": {
             "extensions": ["dbaeumer.vscode-eslint", "rvest.vs-code-prettier-eslint"]
         }
-	},
-	"features": {
-		"ghcr.io/devcontainers/features/github-cli:1": {}
-	}
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    }
 }
