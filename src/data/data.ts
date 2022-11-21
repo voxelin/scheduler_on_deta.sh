@@ -43,11 +43,11 @@ export const books: { [key: string]: { file_id: string; url: string } } = {
         file_id: "BQACAgIAAx0CW-HuuAADCWN7nj0bvMOHyrBZIKbhNmyMXlzgAALKJQACmXjgS18DS8KqH5TVKwQ",
         url: "https://pidruchnyk.com.ua/996-geometriya-merzlyak-9-klas-2017.html",
     },
-    "Українська мова": {
+    "Укр. мова": {
         file_id: "BQACAgIAAx0CW-HuuAADB2N7nibY0kvcWY9OsXyK2iOznfxAAALJJQACmXjgS4I7-fjiyp-gKwQ",
         url: "https://pidruchnyk.com.ua/970-ukrmova-9klas-avramenko.html",
     },
-    "Українська література": {
+    "Укр. літ": {
         file_id: "BQACAgIAAx0CW-HuuAADBWN7ngttmXmWioiwlMdDRbRJQQlsAALIJQACmXjgS7PDiJuR9ZNtKwQ",
         url: "https://pidruchnyk.com.ua/967-ukrliteratura-9-klas-avramenko-2017.html",
     },

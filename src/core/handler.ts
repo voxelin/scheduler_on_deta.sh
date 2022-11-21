@@ -110,6 +110,13 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
             reply_to_message_id: ctx.message?.message_id,
         });
     }
+    public async cancel(ctx: C) {
+        await ctx.reply("Дія скасована.", {
+            reply_markup: {
+                remove_keyboard: true,
+            },
+        });
+    }
 }
 
 export class SystemHandler<C extends CustomContext> {
