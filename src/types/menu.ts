@@ -2,7 +2,7 @@ import { Menu } from "@grammyjs/menu";
 import { format, getWeekOfMonth } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
 import { Keyboard } from "grammy";
-import { v4 } from "uuid";
+import { randomUUID } from "crypto";
 import { books } from "../data/data";
 import { schedule } from "../data/schedule";
 import { CustomContext } from "./bot";
@@ -56,7 +56,7 @@ export const show_schedule = (day: string) => {
     } else {
         message = "❌ *Сьогодні вихідний!*\n";
     }
-    message += "\n`ID: " + v4() + "`";
+    message += "\n`ID: " + randomUUID() + "`";
     return message;
 };
 
