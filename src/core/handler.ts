@@ -3,7 +3,7 @@ import { utcToZonedTime } from "date-fns-tz";
 import { bot } from "../bot";
 import { schedule } from "../data/schedule";
 import { CustomContext } from "../types/bot";
-import { schedule_days_menu, show_schedule } from "../types/menu";
+import { schedule_days_menu, shelf_inline, show_schedule } from "../types/menu";
 import { DevCheckQuery, SchedulerBot } from "./bot";
 import { CommandHandlerError } from "./errors";
 export class CommandHandler<C extends CustomContext = CustomContext> {
@@ -101,6 +101,10 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
         } else {
             return ctx.reply("Ви в режимі тестування. Вебхук не встановлено.");
         }
+    }
+
+    public async shelf(ctx: C) {
+        await ctx.reply("📚 Оберіть книгу:", { reply_markup: shelf_inline, disable_web_page_preview: true });
     }
 }
 

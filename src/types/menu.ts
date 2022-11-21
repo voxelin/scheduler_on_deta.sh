@@ -1,10 +1,11 @@
 import { Menu } from "@grammyjs/menu";
 import { format, getWeekOfMonth } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
+import { Keyboard } from "grammy";
 import { v4 } from "uuid";
+import { books } from "../data/data";
 import { schedule } from "../data/schedule";
 import { CustomContext } from "./bot";
-
 export const show_schedule = (day: string) => {
     const week = getWeekOfMonth(utcToZonedTime(new Date(), "Europe/Kiev")) % 2;
     const time = format(utcToZonedTime(new Date(), "Europe/Kiev"), "HH:mm");
@@ -59,6 +60,10 @@ export const show_schedule = (day: string) => {
     return message;
 };
 
+export const show_book = (book: string) => {
+    return { file_id: books[book].file_id, url: books[book].url };
+};
+
 export const schedule_days_menu = new Menu<CustomContext>("schedule_days_menu", { onMenuOutdated: "Спробуйте знову." })
     .text("Понеділок", (ctx) => {
         const s = show_schedule("Monday");
@@ -81,3 +86,19 @@ export const schedule_days_menu = new Menu<CustomContext>("schedule_days_menu", 
         const s = show_schedule("Friday");
         ctx.editMessageText(s, { parse_mode: "Markdown", disable_web_page_preview: true });
     });
+
+export const shelf_inline = new Keyboard()
+    .text("📕 Німецька")
+    .text("📕 Фізика")
+    .text("📕 Хімія")
+    .row()
+    .text("📕 Біологія")
+    .text("📕 Алгебра")
+    .text("📕 Геометрія")
+    .row()
+    .text("📕 Українська мова")
+    .text("📕 Українська література")
+    .text("📕 Географія")
+    .resized()
+    .selected()
+    .oneTime();

@@ -1,4 +1,4 @@
-import { links } from "./links";
+import { links } from "./data";
 export const schedule: {
     [key: string]: Array<{ start: string; end: string; urls: string[]; name: string; sent?: boolean }>;
 } = {
