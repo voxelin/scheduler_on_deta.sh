@@ -104,7 +104,11 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
     }
 
     public async shelf(ctx: C) {
-        await ctx.reply("📚 Оберіть книгу:", { reply_markup: shelf_inline, disable_web_page_preview: true });
+        await ctx.reply("📚 Оберіть книгу:", {
+            reply_markup: shelf_inline,
+            disable_web_page_preview: true,
+            reply_to_message_id: ctx.message?.message_id,
+        });
     }
 }
 

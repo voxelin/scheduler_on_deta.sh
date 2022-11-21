@@ -6,12 +6,13 @@
     "scripts": {
         "deta-install": "curl -fsSL https://get.deta.dev/cli.sh | sh",
         "dev": "tsc-watch --onSuccess \"node dist/bot.js --dev\"",
-        "deploy": "deta update -e .env && tsc && deta deploy",
+        "deploy": "yarn deta update -e .env && tsc && yarn deta deploy",
         "lint": "eslint src --ext .ts",
         "lint:fix": "eslint src --ext .ts --fix",
         "format": "prettier --write .",
         "git": "git add . && git cz -S && git push",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "deta": "/home/node/.deta/bin/deta"
     },
     "engines": {
         "node": ">=16.0.0"
