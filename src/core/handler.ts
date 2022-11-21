@@ -102,10 +102,6 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
             return ctx.reply("Ви в режимі тестування. Вебхук не встановлено.");
         }
     }
-    public async session(ctx: C) {
-        ctx.session.send_links ? (ctx.session.send_links = false) : (ctx.session.send_links = true);
-        await ctx.reply(String(ctx.session.send_links));
-    }
 }
 
 export class SystemHandler<C extends CustomContext> {
@@ -149,8 +145,6 @@ export class SystemHandler<C extends CustomContext> {
     }
 
     public async handleCommand(ctx: C, command?: string) {
-        if ([953390376, 1220615061].includes(ctx.message!.from!.id))
-            return ctx.reply("Недостатньо прав для виконання команди.");
         if (!command) throw new CommandHandlerError("Command is undefined");
         if (command.startsWith("/")) command = command.slice(1);
         if (command.includes("@")) {

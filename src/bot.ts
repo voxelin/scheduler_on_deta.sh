@@ -1,18 +1,9 @@
 import { config } from "dotenv";
-import { session } from "grammy";
 import { DevCheckQuery, SchedulerBot } from "./core/bot";
-import { CustomContext, SessionData } from "./types/bot";
-import { freeStorage } from "@grammyjs/storage-free";
+import { CustomContext } from "./types/bot";
 if (DevCheckQuery) config({ path: ".env.dev" });
 export const bot = new SchedulerBot<CustomContext>();
 bot.prepare();
-
-bot.use(
-    session({
-        initial: () => ({ send_links: true }),
-        storage: freeStorage<SessionData>(bot.token),
-    }),
-);
 
 bot.on("message", async (ctx) => {
     try {

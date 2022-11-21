@@ -110,13 +110,6 @@
   resolved "https://registry.yarnpkg.com/@grammyjs/parse-mode/-/parse-mode-1.5.0.tgz#7cef50a68e41b45d084dee4a980757b3caae2cb1"
   integrity sha512-6M1aM1CZh2JxTLuE/M7sUqTvjc3/SQHrlwCZq2kZDlprDYQGBFBiRr3F5SKN4u5MMP1iHYfWMDbcWiDzSPxmaA==
 
-"@grammyjs/storage-free@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@grammyjs/storage-free/-/storage-free-2.0.0.tgz#1bf5563af9eff0b7adc3285702467fc8f13b1a5b"
-  integrity sha512-n6ipPKoyFgxkBaeTxpo+c1U8GX/WlUW7hTby/4EIvwrm97j4m//7NSKsq0Vz7oUSJQCBw69ODqsFAe0erJZOgQ==
-  dependencies:
-    node-fetch "^2.6.6"
-
 "@grammyjs/types@^2.10.0":
   version "2.10.2"
   resolved "https://registry.yarnpkg.com/@grammyjs/types/-/types-2.10.2.tgz#c72d9379518aa191ce030e14756954949bef771f"
@@ -2022,7 +2015,7 @@ node-cleanup@^2.1.2:
   resolved "https://registry.yarnpkg.com/node-cleanup/-/node-cleanup-2.1.2.tgz#7ac19abd297e09a7f72a71545d951b517e4dde2c"
   integrity sha512-qN8v/s2PAJwGUtr1/hYTpNKlD6Y9rc4p8KSmJXyGdYGZsDGKXrGThikLFP9OCHFeLeEpQzPwiAtdIvBLqm//Hw==
 
-node-fetch@^2.6.6, node-fetch@^2.6.7:
+node-fetch@^2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==

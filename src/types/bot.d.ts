@@ -1,4 +1,4 @@
-import { Context, SessionFlavor } from "grammy";
+import { Context } from "grammy";
 export interface zoom_url {
     German: string;
     Physics: string;
@@ -23,8 +23,4 @@ export interface schedule {
     [key: string]: Array<{ name: string; start: string; end: string; link: zoom_url[] | zoom_url }>;
 }
 
-export interface SessionData {
-    send_links: boolean;
-}
-
-export type CustomContext = Context & SessionFlavor<SessionData>;
+export type CustomContext = Context;
