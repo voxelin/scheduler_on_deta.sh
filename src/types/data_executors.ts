@@ -1,11 +1,9 @@
-import { Menu } from "@grammyjs/menu";
+import { randomUUID } from "crypto";
 import { format, getWeekOfMonth } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
-import { Keyboard } from "grammy";
-import { randomUUID } from "crypto";
+import { Context, InlineKeyboard, Keyboard } from "grammy";
 import { books } from "../data/data";
 import { schedule } from "../data/schedule";
-import { CustomContext } from "./bot";
 export const show_schedule = (day: string) => {
     const week = getWeekOfMonth(utcToZonedTime(new Date(), "Europe/Kiev")) % 2;
     const time = format(utcToZonedTime(new Date(), "Europe/Kiev"), "HH:mm");
@@ -64,28 +62,28 @@ export const show_book = (book: string) => {
     return { file_id: books[book].file_id, url: books[book].url };
 };
 
-export const schedule_days_menu = new Menu<CustomContext>("schedule_days_menu", { onMenuOutdated: "Спробуйте знову." })
-    .text("Понеділок", (ctx) => {
-        const s = show_schedule("Monday");
-        ctx.editMessageText(s, { parse_mode: "Markdown", disable_web_page_preview: true });
-    })
-    .text("Вівторок", async (ctx) => {
-        const s = show_schedule("Tuesday");
-        ctx.editMessageText(s, { parse_mode: "Markdown", disable_web_page_preview: true });
-    })
-    .text("Середа", async (ctx) => {
-        const s = show_schedule("Wednesday");
-        ctx.editMessageText(s, { parse_mode: "Markdown", disable_web_page_preview: true });
-    })
-    .row()
-    .text("Четвер", async (ctx) => {
-        const s = show_schedule("Thursday");
-        ctx.editMessageText(s, { parse_mode: "Markdown", disable_web_page_preview: true });
-    })
-    .text("П'ятниця", async (ctx) => {
-        const s = show_schedule("Friday");
-        ctx.editMessageText(s, { parse_mode: "Markdown", disable_web_page_preview: true });
-    });
+export const show_keyboard_sch = async (ctx: Context, from_id: number, day: string, reply = true) => {
+    const keyboard = new InlineKeyboard()
+        .text("Понеділок", `Monday:${from_id}`)
+        .text("Вівторок", `Tuesday:${from_id}`)
+        .text("Середа", `Wednesday:${from_id}`)
+        .row()
+        .text("Четвер", `Thursday:${from_id}`)
+        .text("П'ятниця", `Friday:${from_id}`);
+    if (reply) {
+        await ctx.reply(show_schedule(day), {
+            parse_mode: "Markdown",
+            reply_markup: keyboard,
+            disable_web_page_preview: true,
+        });
+    } else {
+        await ctx.editMessageText(show_schedule(day), {
+            parse_mode: "Markdown",
+            reply_markup: keyboard,
+            disable_web_page_preview: true,
+        });
+    }
+};
 
 export const shelf_inline = new Keyboard()
     .text("📕 Німецька")

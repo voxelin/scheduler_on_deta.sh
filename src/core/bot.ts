@@ -2,7 +2,6 @@ import { autoRetry } from "@grammyjs/auto-retry";
 import { parseMode } from "@grammyjs/parse-mode";
 import { Bot } from "grammy";
 import { CustomContext } from "../types/bot";
-import { schedule_days_menu } from "../types/menu";
 import { CommandHandler, SystemHandler } from "./handler";
 
 export class SchedulerBot<C extends CustomContext> extends Bot<C> {
@@ -16,7 +15,6 @@ export class SchedulerBot<C extends CustomContext> extends Bot<C> {
 
     public prepare() {
         this.api.config.use(parseMode("HTML"));
-        this.use(schedule_days_menu);
         this.api.config.use(autoRetry());
     }
 }

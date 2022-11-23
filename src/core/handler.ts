@@ -3,7 +3,7 @@ import { utcToZonedTime } from "date-fns-tz";
 import { bot } from "../bot";
 import { schedule } from "../data/schedule";
 import { CustomContext } from "../types/bot";
-import { schedule_days_menu, shelf_inline, show_schedule } from "../types/menu";
+import { shelf_inline, show_keyboard_sch } from "../types/data_executors";
 import { DevCheckQuery, SchedulerBot } from "./bot";
 import { CommandHandlerError } from "./errors";
 export class CommandHandler<C extends CustomContext = CustomContext> {
@@ -64,11 +64,7 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
     }
 
     public async schedule(ctx: C) {
-        await ctx.reply(show_schedule(format(this.localdate, "EEEE")), {
-            parse_mode: "Markdown",
-            reply_markup: schedule_days_menu,
-            disable_web_page_preview: true,
-        });
+        await show_keyboard_sch(ctx, ctx.from!.id, format(this.localdate, "EEEE"));
     }
 
     public async botinfo(ctx: C) {
@@ -84,7 +80,7 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
 └ <b>Commands:</b> <code>${Object.getOwnPropertyNames(Object.getPrototypeOf(this)).length}</code>`);
     }
     public async drop(ctx: C) {
-        if (![1024118111, 1260609189, 953390376, 1220615061, 5187696616].includes(ctx.from!.id))
+        if (![1024118111, 1260609189, 953390376, 1220615061, 5187696616, 1888411613].includes(ctx.from!.id))
             return ctx.reply("Тільки уповноважений може використовувати цю команду 🤖");
         if (!DevCheckQuery) {
             if ((await bot.api.getWebhookInfo()).url !== "") {
