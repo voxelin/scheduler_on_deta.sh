@@ -84,7 +84,8 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
 └ <b>Commands:</b> <code>${Object.getOwnPropertyNames(Object.getPrototypeOf(this)).length}</code>`);
     }
     public async drop(ctx: C) {
-        if (ctx.from?.id !== 5187696616) return ctx.reply("Тільки власник бота може використовувати цю команду 🤖");
+        if (![1024118111, 1260609189, 953390376, 1220615061, 5187696616].includes(ctx.from!.id))
+            return ctx.reply("Тільки уповноважений може використовувати цю команду 🤖");
         if (!DevCheckQuery) {
             if ((await bot.api.getWebhookInfo()).url !== "") {
                 await ctx.reply("Видалення вебхука...");
