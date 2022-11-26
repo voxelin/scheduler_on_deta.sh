@@ -6,6 +6,7 @@ export default {
     command: "update_als",
     description: "Оновити список команд.",
     in_list: false,
+    prohibed: true,
     run: async (ctx: def.Context) => {
         const commandlist: BotCommand[] = [];
         readdirSync("./dist/commands").forEach(async (file) => {

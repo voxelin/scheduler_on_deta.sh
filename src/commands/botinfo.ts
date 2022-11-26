@@ -4,6 +4,7 @@ export default {
     command: "botinfo",
     description: "Інформація про сервер бота.",
     in_list: false,
+    prohibed: true,
     run: async (ctx: def.Context) => {
         if (ctx.from?.id !== 5187696616) return ctx.reply("Тільки власник бота може використовувати цю команду 🤖");
         await ctx.reply(`
