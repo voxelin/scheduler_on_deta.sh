@@ -3,7 +3,35 @@ import { DevCheckQuery, SchedulerBot } from "./core/bot";
 import { CustomContext } from "./types/bot";
 import { show_book, show_keyboard_sch } from "./types/data_executors";
 if (DevCheckQuery) config({ path: ".env.dev" });
-export const bot = new SchedulerBot<CustomContext>();
+export const bot = new SchedulerBot<CustomContext>(
+    String(process.env.BOT_TOKEN),
+    DevCheckQuery
+        ? {
+              botinfo: {
+                  id: 5718541363,
+                  is_bot: true,
+                  first_name: "тестчунга",
+                  username: "testchungabot",
+                  can_join_groups: true,
+                  can_read_all_group_messages: false,
+                  supports_inline_queries: false,
+              },
+          }
+        : {
+              botinfo: {
+                  id: 5558185718,
+                  is_bot: true,
+                  first_name: "Диктатор Зеленський",
+                  username: "chungachanga_rebot",
+                  can_join_groups: true,
+                  can_read_all_group_messages: false,
+                  supports_inline_queries: false,
+              },
+              client: {
+                  canUseWebhookReply: (method) => method === "sendChatAction",
+              },
+          },
+);
 bot.prepare();
 
 bot.on(":file", async (ctx) => {
@@ -25,7 +53,6 @@ bot.on("message", async (ctx) => {
             });
             await ctx.replyWithDocument(bookdata.file_id);
         } catch (e) {
-            console.log(e);
             await ctx.reply("Невідома книга!");
         }
     }
@@ -44,9 +71,6 @@ bot.on("callback_query", async (ctx) => {
     await show_keyboard_sch(ctx, ctx.from!.id, day, false);
 });
 
-if (!process.env.WEBHOOK_URL) {
-    bot.api.deleteWebhook();
+if (DevCheckQuery) {
     bot.start();
-} else {
-    bot.api.setWebhook(process.env.WEBHOOK_URL ?? "https://example.com");
 }
