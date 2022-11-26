@@ -114,6 +114,32 @@ export class CommandHandler<C extends CustomContext = CustomContext> {
             },
         });
     }
+    public async register_commandline(ctx: C) {
+        await ctx.reply("Зачекайте, з'єднуюсь з API сервером...");
+        await bot.api.setMyCommands([
+            {
+                command: "cancel",
+                description: "Скасувати дію.",
+            },
+            {
+                command: "shelf",
+                description: "Завантажити книгу з приватної галереї.",
+            },
+            {
+                command: "drop",
+                description: "[УПОВНОВАЖЕНІ] Перепризначити вебхук.",
+            },
+            {
+                command: "schedule",
+                description: "Дізнатись розклад уроків та посилання на них.",
+            },
+            {
+                command: "link",
+                description: "Дізнатись посилання на наступний/теперішній урок.",
+            },
+        ]);
+        await ctx.reply("Список команд успішно оновлено.");
+    }
 }
 
 export class SystemHandler<C extends CustomContext> {
