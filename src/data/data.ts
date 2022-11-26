@@ -32,7 +32,7 @@ export const books: { [key: string]: { file_id: string; url: string } } = {
         url: "https://endpoint.blackvoxel.space",
     },
     Хімія: {
-        file_id: "BQACAgIAAx0CW-HuuAADDWN7nnKP2n6Aw37fj5Jo6Q-rh5_EAALMJQACmXjgS5vzOBgLW4YdKwQ",
+        file_id: "BQACAgIAAx0CW-HuuAADUGOB50MJjAIiP8FBRks76FeREYM5AAIaHwACLb8RSOx2Z2gT4hS8KwQ",
         url: "https://pidruchnyk.com.ua/972-himiya-9-klas-savchyn.html",
     },
     Алгебра: {

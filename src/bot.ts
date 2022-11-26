@@ -25,6 +25,7 @@ bot.on("message", async (ctx) => {
             });
             await ctx.replyWithDocument(bookdata.file_id);
         } catch (e) {
+            console.log(e);
             await ctx.reply("Невідома книга!");
         }
     }
@@ -43,9 +44,9 @@ bot.on("callback_query", async (ctx) => {
     await show_keyboard_sch(ctx, ctx.from!.id, day, false);
 });
 
-if (DevCheckQuery) {
+if (!process.env.WEBHOOK_URL) {
     bot.api.deleteWebhook();
     bot.start();
 } else {
-    bot.api.setWebhook(process.env.WEBHOOK_URL!);
+    bot.api.setWebhook(process.env.WEBHOOK_URL ?? "https://example.com");
 }
