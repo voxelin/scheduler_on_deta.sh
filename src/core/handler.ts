@@ -1,6 +1,5 @@
 import { format, isWeekend } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
-import * as fs from "fs";
 import { bot } from "../bot";
 import { schedule } from "../data/schedule";
 import { CustomContext } from "../types/bot";
@@ -46,7 +45,6 @@ export class SystemHandler<C extends CustomContext> {
     }
 
     public async handleCommand(ctx: C, command?: string) {
-        const commandlist = fs.readdirSync("./dist/commands");
         if (!command) throw new CommandHandlerError("Command is undefined");
         if (command.startsWith("/")) command = command.slice(1);
         if (command.includes("@")) {
