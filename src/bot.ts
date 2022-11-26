@@ -72,5 +72,6 @@ bot.on("callback_query", async (ctx) => {
 });
 
 if (DevCheckQuery) {
+    bot.logger.info("Bot is running in development mode!");
     bot.start();
 }

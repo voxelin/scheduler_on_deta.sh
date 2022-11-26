@@ -3,7 +3,6 @@ import * as def from "../core/imports";
 export default {
     name: "drop",
     description: "[УПОВНОВАЖЕНІ] Перепризначити вебхук.",
-    aliases: [],
     in_list: false,
     run: async (ctx: def.Context) => {
         if (![1024118111, 1260609189, 953390376, 1220615061, 5187696616, 1888411613].includes(ctx.from!.id))

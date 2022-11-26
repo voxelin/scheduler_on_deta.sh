@@ -3,7 +3,6 @@ import * as def from "../core/imports";
 export default {
     command: "botinfo",
     description: "Інформація про сервер бота.",
-    aliases: [],
     in_list: false,
     run: async (ctx: def.Context) => {
         if (ctx.from?.id !== 5187696616) return ctx.reply("Тільки власник бота може використовувати цю команду 🤖");

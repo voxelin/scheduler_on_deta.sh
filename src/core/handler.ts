@@ -2,7 +2,6 @@ import { format, isWeekend } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
 import * as fs from "fs";
 import { bot } from "../bot";
-import Command from "../commands";
 import { schedule } from "../data/schedule";
 import { CustomContext } from "../types/bot";
 import { SchedulerBot } from "./bot";
@@ -54,9 +53,8 @@ export class SystemHandler<C extends CustomContext> {
             if (command.split("@")[1] !== bot.botInfo.username) return;
             command = command.split("@")[0];
         }
-        if (commandlist.includes(`${command}.js`)) {
-            const runner: Command = (await import(`../commands/${command}`)).default;
-            return runner.run(ctx);
+        if (bot.commands.filter((cmd) => cmd.command === command).length > 0) {
+            return bot.commands.filter((cmd) => cmd.command === command)[0].run(ctx);
         }
     }
 }

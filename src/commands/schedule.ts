@@ -6,7 +6,6 @@ import { show_keyboard_sch } from "../types/data_executors";
 export default {
     command: "schedule",
     description: "Дізнатись розклад уроків та посилання на них.",
-    aliases: ["s"],
     in_list: true,
     run: async (ctx: def.Context) => {
         const date = utcToZonedTime(new Date(), "Europe/Kiev");

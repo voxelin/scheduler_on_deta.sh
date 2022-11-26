@@ -4,7 +4,6 @@ import { shelf_inline } from "../types/data_executors";
 export default {
     command: "shelf",
     description: "Завантажити книгу з приватної галереї.",
-    aliases: ["sh"],
     in_list: true,
     run: async (ctx: def.Context) => {
         await ctx.reply("📚 Оберіть книгу:", {

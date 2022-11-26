@@ -3,7 +3,6 @@ import * as def from "../core/imports";
 export default {
     command: "about",
     description: "Базова інформація про бота.",
-    aliases: [],
     in_list: false,
     run: async (ctx: def.Context) => {
         await ctx.reply(

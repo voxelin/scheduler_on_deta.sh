@@ -6,7 +6,6 @@ import * as def from "../core/imports";
 export default {
     command: "link",
     description: "Дізнатись посилання на наступний/теперішній урок.",
-    aliases: ["l"],
     in_list: true,
     run: async (ctx: def.Context) => {
         const date = utcToZonedTime(new Date(), "Europe/Kiev");

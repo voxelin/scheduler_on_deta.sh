@@ -5,7 +5,6 @@ import Command from "./index.d";
 export default {
     command: "update_als",
     description: "Оновити список команд.",
-    aliases: [],
     in_list: false,
     run: async (ctx: def.Context) => {
         const commandlist: BotCommand[] = [];
