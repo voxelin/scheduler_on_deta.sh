@@ -20,15 +20,15 @@ export const links: zoom_url = {
 };
 export const books: { [key: string]: { file_id: string; url: string } } = {
     Німецька: {
-        file_id: "BQACAgIAAx0CW-HuuAADEWN7nqq292GQMIWX-0eOxoFoEYNHAALOJQACmXjgSy98ku_c-W0FKwQ",
+        file_id: "BQACAgIAAx0CW-HuuAADVGOB50NT5bGG9J0al-ukxI4bZUFrAAIeHwACLb8RSH_eSoRdDucKKwQ",
         url: "https://pidruchnyk.com.ua/9-klas/nimecka-mova",
     },
     Фізика: {
-        file_id: "BQACAgIAAx0CW-HuuAADD2N7no7o-f-uHa5y4HI-h13uETZ0AALNJQACmXjgSzNqg1rp54tWKwQ",
+        file_id: "BQACAgIAAx0CW-HuuAADUWOB50Njpq4Zq9J8g8sYkYvaPV10AAIbHwACLb8RSEDDxDuRm2AaKwQ",
         url: "https://4book.org/uchebniki-ukraina/9-klas/pidruchnik-fizika-9-klas-baryahtar-2017",
     },
     "Англійська мова": {
-        file_id: "BQACAgIAAx0CW-HuuAADFWN7n0bggCcFrG0iH_6MPCKZbZREAALUJQACmXjgS9uPJpP-DRvzKwQ",
+        file_id: "BQACAgIAAx0CW-HuuAADWWOB50MpVcdlroGr9hGaQE4WPf8-AAIlHwACLb8RSCupTnRD3jidKwQ",
         url: "https://endpoint.blackvoxel.space",
     },
     Хімія: {
@@ -36,27 +36,31 @@ export const books: { [key: string]: { file_id: string; url: string } } = {
         url: "https://pidruchnyk.com.ua/972-himiya-9-klas-savchyn.html",
     },
     Алгебра: {
-        file_id: "BQACAgIAAx0CW-HuuAADC2N7nk-0mJvr2Sd8cDuz29Fvp87mAALLJQACmXjgS7pB2ENVqX7xKwQ",
+        file_id: "BQACAgIAAx0CW-HuuAADWmOB50PZPmsFlRolr9xyVrnnE1vQAAImHwACLb8RSE0OSn2uYoGEKwQ",
         url: "https://pidruchnyk.com.ua/982-algebra-merzlyak-9-klas-2017.html",
     },
     Геометрія: {
-        file_id: "BQACAgIAAx0CW-HuuAADCWN7nj0bvMOHyrBZIKbhNmyMXlzgAALKJQACmXjgS18DS8KqH5TVKwQ",
+        file_id: "BQACAgIAAx0CW-HuuAADVmOB50MFKHmpQ9N4xhwShi7W0_wqAAIhHwACLb8RSO1u3tihBbW1KwQ",
         url: "https://pidruchnyk.com.ua/996-geometriya-merzlyak-9-klas-2017.html",
     },
     "Укр. мова": {
-        file_id: "BQACAgIAAx0CW-HuuAADB2N7nibY0kvcWY9OsXyK2iOznfxAAALJJQACmXjgS4I7-fjiyp-gKwQ",
+        file_id: "BQACAgIAAx0CW-HuuAADUmOB50MvBMlCAWCrcxOPqQLRz9RGAAIcHwACLb8RSJp3JnsWltB7KwQ",
         url: "https://pidruchnyk.com.ua/970-ukrmova-9klas-avramenko.html",
     },
     "Укр. літ": {
-        file_id: "BQACAgIAAx0CW-HuuAADBWN7ngttmXmWioiwlMdDRbRJQQlsAALIJQACmXjgS7PDiJuR9ZNtKwQ",
+        file_id: "BQACAgIAAx0CW-HuuAADUmOB50MvBMlCAWCrcxOPqQLRz9RGAAIcHwACLb8RSJp3JnsWltB7KwQ",
         url: "https://pidruchnyk.com.ua/967-ukrliteratura-9-klas-avramenko-2017.html",
     },
     Біологія: {
-        file_id: "BQACAgIAAx0CW-HuuAADA2N7nfUfzOliF0HtRys-BXvuO9M-AALHJQACmXjgS2mbExfcDXmoKwQ",
+        file_id: "BQACAgIAAx0CW-HuuAADWGOB50NTCK3gmc96vJlZr6mTxz2TAAIjHwACLb8RSBUsMk1HF8DaKwQ",
         url: "https://pidruchnyk.com.ua/998-biologiya-9-klas-mezhzherin.html",
     },
     Географія: {
-        file_id: "BQACAgIAAx0CW-HuuAADE2N7nxnZOz2LXPYilS-WqyQRFEkcAALRJQACmXjgS_Jh8MbWwXg5KwQ",
+        file_id: "BQACAgIAAx0CW-HuuAADV2OB50MIOClYhrNDi4lCdv7LsO8AAyIfAAItvxFIkR7ROmU1HMQrBA",
         url: "https://pidruchnyk.com.ua/993-geografiya-9-klas-boyko.html",
+    },
+    Інформатика: {
+        file_id: "BQACAgIAAx0CW-HuuAADVWOB50Oa3EeFofLNcq0nU8WWcUV0AAIgHwACLb8RSPk7WYzQgS2FKwQ",
+        url: "https://endpoint.blackvoxel.space",
     },
 };

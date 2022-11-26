@@ -6,6 +6,14 @@ if (DevCheckQuery) config({ path: ".env.dev" });
 export const bot = new SchedulerBot<CustomContext>();
 bot.prepare();
 
+bot.on(":file", async (ctx) => {
+    if (DevCheckQuery) {
+        await ctx.reply(`📁 *${ctx.message!.document!.file_name}* - \`${ctx.message!.document!.file_id}\`\n`, {
+            parse_mode: "Markdown",
+        });
+    }
+});
+
 bot.on("message", async (ctx) => {
     if (ctx.message?.text?.startsWith("📕 ")) {
         try {
