@@ -59,7 +59,7 @@ bot.on("message", async (ctx) => {
     try {
         await bot.sysHandlers.handleCommand(ctx, ctx.message.text!);
     } catch (e) {
-        return;
+        console.error(e);
     }
 });
 
@@ -72,5 +72,6 @@ bot.on("callback_query", async (ctx) => {
 });
 
 if (DevCheckQuery) {
+    bot.logger.info("Bot is running in development mode!");
     bot.start();
 }
