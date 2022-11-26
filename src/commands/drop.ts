@@ -1,7 +1,7 @@
 import * as def from "../core/imports";
 
 export default {
-    name: "drop",
+    command: "drop",
     description: "[УПОВНОВАЖЕНІ] Перепризначити вебхук.",
     in_list: false,
     run: async (ctx: def.Context) => {

@@ -1,7 +1,7 @@
 import * as def from "../core/imports";
 
 export default {
-    name: "cancel",
+    command: "cancel",
     description: "Відмінити поточну дію.",
     in_list: false,
     run: async (ctx: def.Context) => {
