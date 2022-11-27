@@ -48,7 +48,7 @@ export const books: { [key: string]: { file_id: string; url: string } } = {
         url: "https://pidruchnyk.com.ua/970-ukrmova-9klas-avramenko.html",
     },
     "Укр. літ": {
-        file_id: "BQACAgIAAx0CW-HuuAADUmOB50MvBMlCAWCrcxOPqQLRz9RGAAIcHwACLb8RSJp3JnsWltB7KwQ",
+        file_id: "BQACAgIAAx0CW-HuuAADU2OB50MOz-eQCjshFaiq_DiEkxPEAAIdHwACLb8RSHmrjAAB1qvo3ysE",
         url: "https://pidruchnyk.com.ua/967-ukrliteratura-9-klas-avramenko-2017.html",
     },
     Біологія: {
