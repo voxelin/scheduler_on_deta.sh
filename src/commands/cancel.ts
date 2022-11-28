@@ -9,6 +9,7 @@ export default {
             reply_markup: {
                 remove_keyboard: true,
             },
+            reply_to_message_id: ctx.message?.message_id,
         });
     },
 };

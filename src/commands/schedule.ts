@@ -9,6 +9,6 @@ export default {
     in_list: true,
     run: async (ctx: def.Context) => {
         const date = utcToZonedTime(new Date(), "Europe/Kiev");
-        await show_keyboard_sch(ctx, ctx.from!.id, format(date, "EEEE"));
+        await show_keyboard_sch(ctx, format(date, "EEEE"));
     },
 };

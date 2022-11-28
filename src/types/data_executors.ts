@@ -15,7 +15,7 @@ export const show_schedule = (day: string) => {
         Thursday: "Четвер",
         Friday: "П'ятниця",
     };
-    let message = `🗓️ *Графік на* _${days_i18n[day]}_:\n`;
+    let message = `[🗓️](https://ieljit.lol/${randomUUID()}) *Графік на* _${days_i18n[day]}_:\n`;
     const ongoing = (timestart: string, timeend: string) => {
         return time >= timestart && time <= timeend;
     };
@@ -54,7 +54,6 @@ export const show_schedule = (day: string) => {
     } else {
         message = "❌ *Сьогодні вихідний!*\n";
     }
-    message += "\n`ID: " + randomUUID() + "`";
     return message;
 };
 
@@ -62,14 +61,14 @@ export const show_book = (book: string) => {
     return { file_id: books[book].file_id, url: books[book].url };
 };
 
-export const show_keyboard_sch = async (ctx: Context, from_id: number, day: string, reply = true) => {
+export const show_keyboard_sch = async (ctx: Context, day: string, reply = true) => {
     const keyboard = new InlineKeyboard()
-        .text("Понеділок", `Monday:${from_id}`)
-        .text("Вівторок", `Tuesday:${from_id}`)
-        .text("Середа", `Wednesday:${from_id}`)
+        .text("Понеділок", `Monday`)
+        .text("Вівторок", `Tuesday`)
+        .text("Середа", `Wednesday`)
         .row()
-        .text("Четвер", `Thursday:${from_id}`)
-        .text("П'ятниця", `Friday:${from_id}`);
+        .text("Четвер", `Thursday`)
+        .text("П'ятниця", `Friday`);
     if (reply) {
         await ctx.reply(show_schedule(day), {
             parse_mode: "Markdown",

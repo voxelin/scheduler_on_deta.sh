@@ -64,11 +64,9 @@ bot.on("message", async (ctx) => {
 });
 
 bot.on("callback_query", async (ctx) => {
-    const [day, from_id] = ctx.callbackQuery!.data!.split(":");
-    if (Number(from_id) !== ctx.callbackQuery.from.id)
-        return await ctx.answerCallbackQuery("🤖 Ви не можете використовувати цю кнопку!");
+    const day = ctx.callbackQuery.data ?? "Monday";
     await ctx.answerCallbackQuery();
-    await show_keyboard_sch(ctx, ctx.from!.id, day, false);
+    await show_keyboard_sch(ctx, day, false);
 });
 
 if (DevCheckQuery) {
