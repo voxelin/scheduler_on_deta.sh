@@ -10,7 +10,7 @@ hook.get("/setWebhookUrl", async (_req, res) => {
     await bot.api.setWebhook(process.env.WEBHOOK_URL ?? "https://endpoint.blackvoxel.space");
     res.send({ message: "Webhook url was set" });
 });
-hook.lib.cron(async (event: any) => {
+hook.lib.cron(async () => {
     return await bot.sysHandlers.handleAutomaticLink();
 });
 export = hook;
