@@ -12,7 +12,7 @@ export default {
         if (isWeekend(date)) {
             return await ctx.reply("Сьогодні вихідний 🥳");
         }
-        const _d = await new SystemHandler(def.bot).handleLink();
+        const _d = await new SystemHandler().handleLink();
         const { urls, next } = _d;
         let { name } = _d;
         if (Object.keys(_d).length === 0) return ctx.reply("Уроки закінчились, відпочивайте! 🫂");

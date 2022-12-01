@@ -33,7 +33,7 @@ export class SchedulerBot<C extends CustomContext> extends Bot<C> {
             },
             botInfo: opts?.botinfo,
         });
-        this.sysHandlers = new SystemHandler<C>(this);
+        this.sysHandlers = new SystemHandler<C>();
     }
 
     public prepare() {
