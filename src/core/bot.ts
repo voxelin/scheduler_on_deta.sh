@@ -1,38 +1,17 @@
 import { autoRetry } from "@grammyjs/auto-retry";
 import { parseMode } from "@grammyjs/parse-mode";
 import { readdirSync } from "fs";
-import { Bot } from "grammy";
+import { Bot, BotConfig } from "grammy";
 import pino from "pino";
 import Command from "../commands";
 import { CustomContext } from "../types/bot";
 import { SystemHandler } from "./handler";
-export class SchedulerBot<C extends CustomContext> extends Bot<C> {
+export class BotWrapper<C extends CustomContext> extends Bot<C> {
     public sysHandlers: SystemHandler<C>;
     public commands: Command[] = [];
     public logger = pino();
-    constructor(
-        token?: string,
-        opts?: {
-            botinfo: {
-                id: number;
-                is_bot: true;
-                first_name: string;
-                username: string;
-                can_join_groups: boolean;
-                can_read_all_group_messages: boolean;
-                supports_inline_queries: boolean;
-            };
-            client?: {
-                canUseWebhookReply?: (method: string) => boolean;
-            };
-        },
-    ) {
-        super(token || String(process.env.BOT_TOKEN), {
-            client: {
-                canUseWebhookReply: opts?.client?.canUseWebhookReply,
-            },
-            botInfo: opts?.botinfo,
-        });
+    constructor(token: string, config?: BotConfig<C>) {
+        super(token, config);
         this.sysHandlers = new SystemHandler<C>();
     }
 

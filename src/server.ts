@@ -5,12 +5,20 @@ import { bot } from "./bot";
 const hook = App<express.Express>(express());
 hook.use(express.json());
 
+// This is the webhook callback route
 hook.post("/" + process.env.BOT_TOKEN, webhookCallback(bot, "express"));
+
+// Shortcut for setting up a webhook
 hook.get("/setWebhookUrl", async (_req, res) => {
     await bot.api.setWebhook(process.env.WEBHOOK_URL ?? "https://endpoint.blackvoxel.space");
     res.send({ message: "Webhook url was set" });
 });
+
+// cron job
 hook.lib.cron(async () => {
-    return await bot.sysHandlers.handleAutomaticLink();
+    await bot.sysHandlers.handleAutomaticLink();
+    return "CRON";
 });
+
+// default export
 export = hook;

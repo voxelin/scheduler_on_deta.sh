@@ -73,22 +73,20 @@ export class SystemHandler<C extends CustomContext> {
                     } else {
                         switch (schedule[day][i].name) {
                             case "📚 Англійська":
-                                await bot.api.sendMessage(
+                                return await bot.api.sendMessage(
                                     Number(process.env.GID),
-                                    `<b>Починається урок</b> <code>${name}</code> \n1. <a href="${schedule[day][i].urls[0]}">Чепурна</a>\n2. <a href="${schedule[day][i].urls[1]}">Дунько</a>`,
+                                    `<b>Починається урок</b> <code>${schedule[day][i].name}</code> \n1. <a href="${schedule[day][i].urls[0]}">Чепурна</a>\n2. <a href="${schedule[day][i].urls[1]}">Дунько</a>`,
                                     { disable_web_page_preview: true, parse_mode: "HTML" },
                                 );
-                                break;
                             case "💻 Інформатика":
-                                await bot.api.sendMessage(
+                                return await bot.api.sendMessage(
                                     Number(process.env.GID),
-                                    `<b>Починається урок</b> <code>${name}</code> \n1. <a href="${schedule[day][i].urls[0]}">Беднар</a>\n2. <a href="${schedule[day][i].urls[1]}">Шеремет</a>`,
+                                    `<b>Починається урок</b> <code>${schedule[day][i].name}</code> \n1. <a href="${schedule[day][i].urls[0]}">Беднар</a>\n2. <a href="${schedule[day][i].urls[1]}">Шеремет</a>`,
                                     { disable_web_page_preview: true, parse_mode: "HTML" },
                                 );
-                                break;
                             case "🎨 Мистецтво | 📜 Основи здоров'я":
                                 if (week == 0) {
-                                    await bot.api.sendMessage(
+                                    return await bot.api.sendMessage(
                                         Number(process.env.GID),
                                         `<b>Починається урок</b> <code>📜 Основи здоров'я</code> \n${schedule[day][i].urls[1]}`,
                                         {
@@ -97,7 +95,7 @@ export class SystemHandler<C extends CustomContext> {
                                         },
                                     );
                                 } else {
-                                    await bot.api.sendMessage(
+                                    return await bot.api.sendMessage(
                                         Number(process.env.GID),
                                         `<b>Починається урок</b> <code>🎨 Мистецтво</code> \n${schedule[day][i].urls[0]}`,
                                         {
@@ -106,10 +104,9 @@ export class SystemHandler<C extends CustomContext> {
                                         },
                                     );
                                 }
-                                break;
                             case "🌍 Географія | 📜 Історія України":
                                 if (week == 0) {
-                                    await bot.api.sendMessage(
+                                    return await bot.api.sendMessage(
                                         Number(process.env.GID),
                                         `<b>Починається урок</b> <code>📜 Історія України</code> \n${schedule[day][i].urls[1]}`,
                                         {
@@ -118,7 +115,7 @@ export class SystemHandler<C extends CustomContext> {
                                         },
                                     );
                                 } else {
-                                    await bot.api.sendMessage(
+                                    return await bot.api.sendMessage(
                                         Number(process.env.GID),
                                         `<b>Починається урок</b> <code>🌍 Географія</code> \n${schedule[day][i].urls[0]}`,
                                         {
@@ -127,7 +124,6 @@ export class SystemHandler<C extends CustomContext> {
                                         },
                                     );
                                 }
-                                break;
                         }
                     }
                 }

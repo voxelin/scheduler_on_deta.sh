@@ -20,7 +20,7 @@ export interface zoom_url {
 }
 
 export interface schedule {
-    [key: string]: Array<{ name: string; start: string; end: string; link: zoom_url[] | zoom_url }>;
+    [key: string]: { name: string; start: string; end: string; link: zoom_url[] | zoom_url }[];
 }
 
 export type CustomContext = Context;

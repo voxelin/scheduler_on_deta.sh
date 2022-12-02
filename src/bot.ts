@@ -1,13 +1,13 @@
 import { config } from "dotenv";
-import { DevCheckQuery, SchedulerBot } from "./core/bot";
+import { BotWrapper, DevCheckQuery } from "./core/bot";
 import { CustomContext } from "./types/bot";
 import { show_book, show_keyboard_sch } from "./types/data_executors";
 if (DevCheckQuery) config({ path: ".env.dev" });
-export const bot = new SchedulerBot<CustomContext>(
+export const bot = new BotWrapper<CustomContext>(
     String(process.env.BOT_TOKEN),
     DevCheckQuery
         ? {
-              botinfo: {
+              botInfo: {
                   id: 5718541363,
                   is_bot: true,
                   first_name: "тестчунга",
@@ -18,7 +18,7 @@ export const bot = new SchedulerBot<CustomContext>(
               },
           }
         : {
-              botinfo: {
+              botInfo: {
                   id: 5558185718,
                   is_bot: true,
                   first_name: "Диктатор Зеленський",

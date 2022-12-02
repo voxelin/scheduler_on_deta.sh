@@ -1,6 +1,6 @@
 import { links } from "./data";
 export const schedule: {
-    [key: string]: Array<{ start: string; end: string; urls: string[]; name: string; sent?: boolean }>;
+    [key: string]: { start: string; end: string; urls: string[]; name: string; sent?: boolean }[];
 } = {
     Monday: [
         { start: "08:15", end: "09:00", urls: [links.German], name: "💬 Німецька" },
