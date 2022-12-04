@@ -14,11 +14,11 @@ hook.get("/setWebhookUrl", async (_req, res) => {
     res.send({ message: "Webhook url was set" });
 });
 
-// cron job
-hook.lib.cron(async () => {
-    await bot.sysHandlers.handleAutomaticLink();
-    return "CRON";
-});
+// // cron job
+// hook.lib.cron(async () => {
+//     await bot.sysHandlers.handleAutomaticLink();
+//     return "CRON";
+// });
 
 // default export
 export = hook;
