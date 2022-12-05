@@ -1,4 +1,4 @@
-import { format, getWeekOfMonth, isWeekend } from "date-fns";
+import { format, isWeekend } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
 import { bot } from "../bot";
 import { schedule } from "../data/schedule";
@@ -50,86 +50,6 @@ export class SystemHandler<C extends CustomContext> {
         }
         if (bot.commands.filter((cmd) => cmd.command === command).length > 0) {
             return bot.commands.filter((cmd) => cmd.command === command)[0].run(ctx);
-        }
-    }
-
-    public async handleAutomaticLink() {
-        const day = format(this.localdate, "EEEE");
-        const time = format(this.localdate, "HH:mm");
-        const week = getWeekOfMonth(this.localdate) % 2;
-        if (!isWeekend(this.localdate)) {
-            for (let i = 0; i < schedule[day].length; i++) {
-                if (time >= schedule[day][i].start && time <= schedule[day][i].end) {
-                    if (schedule[day][i].sent) return;
-                    schedule[day][i].sent = true;
-                    if (schedule[day][i].urls.length == 1) {
-                        return await bot.api.sendMessage(
-                            Number(process.env.GID),
-                            `Урок <code>${schedule[day][i].name}</code> починається!\n${schedule[day][i].urls[0]}`,
-                            {
-                                parse_mode: "HTML",
-                            },
-                        );
-                    } else {
-                        switch (schedule[day][i].name) {
-                            case "📚 Англійська":
-                                return await bot.api.sendMessage(
-                                    Number(process.env.GID),
-                                    `<b>Починається урок</b> <code>${schedule[day][i].name}</code> \n1. <a href="${schedule[day][i].urls[0]}">Чепурна</a>\n2. <a href="${schedule[day][i].urls[1]}">Дунько</a>`,
-                                    { disable_web_page_preview: true, parse_mode: "HTML" },
-                                );
-                            case "💻 Інформатика":
-                                return await bot.api.sendMessage(
-                                    Number(process.env.GID),
-                                    `<b>Починається урок</b> <code>${schedule[day][i].name}</code> \n1. <a href="${schedule[day][i].urls[0]}">Беднар</a>\n2. <a href="${schedule[day][i].urls[1]}">Шеремет</a>`,
-                                    { disable_web_page_preview: true, parse_mode: "HTML" },
-                                );
-                            case "🎨 Мистецтво | 📜 Основи здоров'я":
-                                if (week == 0) {
-                                    return await bot.api.sendMessage(
-                                        Number(process.env.GID),
-                                        `<b>Починається урок</b> <code>📜 Основи здоров'я</code> \n${schedule[day][i].urls[1]}`,
-                                        {
-                                            disable_web_page_preview: true,
-                                            parse_mode: "HTML",
-                                        },
-                                    );
-                                } else {
-                                    return await bot.api.sendMessage(
-                                        Number(process.env.GID),
-                                        `<b>Починається урок</b> <code>🎨 Мистецтво</code> \n${schedule[day][i].urls[0]}`,
-                                        {
-                                            disable_web_page_preview: true,
-                                            parse_mode: "HTML",
-                                        },
-                                    );
-                                }
-                            case "🌍 Географія | 📜 Історія України":
-                                if (week == 0) {
-                                    return await bot.api.sendMessage(
-                                        Number(process.env.GID),
-                                        `<b>Починається урок</b> <code>📜 Історія України</code> \n${schedule[day][i].urls[1]}`,
-                                        {
-                                            disable_web_page_preview: true,
-                                            parse_mode: "HTML",
-                                        },
-                                    );
-                                } else {
-                                    return await bot.api.sendMessage(
-                                        Number(process.env.GID),
-                                        `<b>Починається урок</b> <code>🌍 Географія</code> \n${schedule[day][i].urls[0]}`,
-                                        {
-                                            disable_web_page_preview: true,
-                                            parse_mode: "HTML",
-                                        },
-                                    );
-                                }
-                        }
-                    }
-                }
-            }
-        } else {
-            return;
         }
     }
 }
